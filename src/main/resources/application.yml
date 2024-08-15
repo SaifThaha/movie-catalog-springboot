@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    username: root
+    password: saif@321
+    url: "jdbc:mysql://localhost:3306/movie_db"
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+        hibernate:
+          format_sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  servlet:
+    multipart:
+      enabled: true
+
+project:
+  poster: posters/
+
+base:
+  url: "http://localhost:8080"
