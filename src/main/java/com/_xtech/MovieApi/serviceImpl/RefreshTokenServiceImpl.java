@@ -5,7 +5,7 @@ import com._xtech.MovieApi.Repository.UserRepository;
 import com._xtech.MovieApi.entity.RefreshToken;
 import com._xtech.MovieApi.entity.User;
 import com._xtech.MovieApi.service.RefreshTokenService;
-import lombok.Data;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,9 +20,11 @@ import java.util.concurrent.TimeUnit;
 @Transactional
 @RequiredArgsConstructor
 public class RefreshTokenServiceImpl implements RefreshTokenService {
+
     private static final Long VALIDITY = TimeUnit.MINUTES.toMillis(180);
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
+    
     @Override
     public RefreshToken createRefreshToken(String username) {
         User user = userRepository.findByEmail(username);
