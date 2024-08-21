@@ -4,6 +4,8 @@ import com._xtech.MovieApi.Repository.RefreshTokenRepository;
 import com._xtech.MovieApi.Repository.UserRepository;
 import com._xtech.MovieApi.entity.RefreshToken;
 import com._xtech.MovieApi.entity.User;
+import com._xtech.MovieApi.exceptions.ExpiredRefreshTokenException;
+import com._xtech.MovieApi.exceptions.RefreshTokenNotFoundException;
 import com._xtech.MovieApi.service.RefreshTokenService;
 
 import lombok.RequiredArgsConstructor;
@@ -49,11 +51,11 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Override
     public RefreshToken verifyRefreshToken(String refreshToken) {
         RefreshToken token = refreshTokenRepository.findByRefreshToken(refreshToken)
-                .orElseThrow(() ->new RuntimeException("Refresh Token Not Found"));
+                .orElseThrow(() ->new RefreshTokenNotFoundException("Refresh Token Not Found"));
 
         if (IsTokenExpired(token)){
             refreshTokenRepository.delete(token);
-            throw new RuntimeException("Refresh token not found");
+            throw new ExpiredRefreshTokenException("Refresh token expired");
         }
         return token;
     }

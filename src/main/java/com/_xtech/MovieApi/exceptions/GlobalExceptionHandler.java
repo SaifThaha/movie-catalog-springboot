@@ -30,4 +30,18 @@ public class GlobalExceptionHandler {
         problemDetail.setTitle("File Is Empty");
         return problemDetail;
     }
+
+    @ExceptionHandler(RefreshTokenNotFoundException.class)
+    public ProblemDetail handleRefreshTokenNotFoundException(RefreshTokenNotFoundException exception){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
+        problemDetail.setTitle("Refresh Token Not Found");
+        return problemDetail;
+    }
+
+    @ExceptionHandler(ExpiredRefreshTokenException.class)
+    public ProblemDetail handleExpiredRefreshTokenException(ExpiredRefreshTokenException exception){
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, exception.getMessage());
+        problemDetail.setTitle("Refresh Token Expired");
+        return problemDetail;
+    }
 }
