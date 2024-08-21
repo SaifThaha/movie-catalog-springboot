@@ -15,7 +15,7 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping("/user")
-    @ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.CREATED)
     public RegistrationResponseDto registerUser(@Valid @RequestBody RegistrationRequestDto registrationRequestDto){
         return registrationService.registerUser(registrationRequestDto);
     }
